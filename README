@@ -1,0 +1,79 @@
+# sfPropelTaggableWidgetPlugin
+
+## Introduction
+
+This plugins depends on sfPropelActAsTaggableBehaviorPlugin and jQuery
+You will be able to add a nice tag selection tool to your forms.
+
+## Features
+
+  * user-friendly tag insertion with mouse and keyboard interaction
+  * tags added and removed by check/uncheck on checkboxes
+  * tag client-side, save server-side
+  * easy label customization
+  * widget and validator class
+
+## Get it installed
+
+  * be sure to have sfPropelActAsTaggableBehaviorPlugin installed and enabled
+  
+  * be sure to enable jQuery
+  
+  * go to your project's root
+
+  * Install the plugin:
+
+         ./symfony plugin:install sfPropelTaggableWidgetPlugin
+
+  * clear cache:
+
+         ./symfony cc
+
+
+
+
+## Usage
+
+### Enable the widget and the in your form class
+
+
+    [php]
+    class PostForm extends BasePostForm {
+      public function configure()
+      {
+        $this->setWidget('tags', new sfWidgetFormInputTags(array(
+          'taggable_object'          => $this->getObject(),
+          'enable_autocomplete'      => true,
+          'check_all_label'          => 'Your "check all" label',
+          'uncheck_all_label'        => 'Your "uncheck all" label',
+          'invert_selection_label'   => 'Your "invert selection" label',
+        )));
+      }
+    }
+
+
+### Set the validator
+
+    [php]
+    class PostForm extends BasePostForm {
+      public function configure()
+      {
+        $this->setWidget('tags', new sfWidgetFormInputTags(array(
+          'taggable_object'          => $this->getObject(),
+          'enable_autocomplete'      => true,
+          'check_all_label'          => 'Your "check all" label',
+          'uncheck_all_label'        => 'Your "uncheck all" label',
+          'invert_selection_label'   => 'Your "invert selection" label',
+        )));
+        
+        $this->setValidator('tags', new sfValidatorTags());
+      }
+    }
+
+## Todo
+* ship jquery with the plugin, and auto-load it only if necessary...
+* add a flash tag cloud
+
+## License and credits
+
+This plugin has been developed by mattsister and is licensed under the MIT license.

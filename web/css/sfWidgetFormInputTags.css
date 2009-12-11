@@ -1,0 +1,51 @@
+/* 
+    Document   : sfWidgetFormInputTags.css
+    Created on : 7-dic-2009, 17.42.30
+    Author     : Matteo Giachino
+    Description: stylesheet included in the sfPropelTaggableWidgetPlugin
+*/
+
+ul.previous-tags {
+  margin-top: 0em;
+  margin-left: 0em;
+}
+
+  ul.previous-tags li {
+    display: inline;
+    list-style-type: none;
+    padding: 0 1em 0 0;
+  }
+    ul.previous-tags li input {
+      margin: 0 .3em 0 0;
+      position: relative;
+      top: .2em;
+    }
+    ul.previous-tags li em {
+      font-style: normal;
+      color: #AAA;
+      text-decoration: line-through;
+    }
+    ul.previous-tags li em.mantain {
+      color: #333;
+      text-decoration: none;
+    }
+
+.tag_common_actions {
+  display: inline;
+}
+
+a.tag-action {
+  margin: 0 0 0 1em;
+  padding: 4px 4px 4px 20px;
+}
+a.tag-action.check {
+  background:transparent url(../images/action_check.png) no-repeat scroll 0 0;
+}
+a.tag-action.uncheck {
+  background:transparent url(../images/action_uncheck.png) no-repeat scroll 0 0;
+}
+a.tag-action.invert {
+  background:transparent url(../images/action_invert.png) no-repeat scroll 0 0;
+}
+
+
