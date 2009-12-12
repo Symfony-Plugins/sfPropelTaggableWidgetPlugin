@@ -1,5 +1,8 @@
 # sfPropelTaggableWidgetPlugin
 
+If you have sfPropelActAsTaggableBehaviorPlugin installed you will get a widget (and a validator) with rich user interface, with autocomplete and keyboard interaction.
+![ss1.png](http://trac.symfony-project.org/attachment/wiki/sfPropelTaggableWidgetPlugin/ss1.png?format=raw)
+
 ## Introduction
 
 This plugins depends on sfPropelActAsTaggableBehaviorPlugin and jQuery
@@ -25,16 +28,14 @@ You will be able to add a nice tag selection tool to your forms.
 
          ./symfony plugin:install sfPropelTaggableWidgetPlugin
 
-  * clear cache:
+  * clear your cache:
 
          ./symfony cc
 
 
-
-
 ## Usage
 
-### Enable the widget and the in your form class
+### Enable the widget in your form class
 
 
     [php]
@@ -43,10 +44,7 @@ You will be able to add a nice tag selection tool to your forms.
       {
         $this->setWidget('tags', new sfWidgetFormInputTags(array(
           'taggable_object'          => $this->getObject(),
-          'enable_autocomplete'      => true,
-          'check_all_label'          => 'Your "check all" label',
-          'uncheck_all_label'        => 'Your "uncheck all" label',
-          'invert_selection_label'   => 'Your "invert selection" label',
+          'enable_autocomplete'      => true
         )));
       }
     }
@@ -60,20 +58,25 @@ You will be able to add a nice tag selection tool to your forms.
       {
         $this->setWidget('tags', new sfWidgetFormInputTags(array(
           'taggable_object'          => $this->getObject(),
-          'enable_autocomplete'      => true,
-          'check_all_label'          => 'Your "check all" label',
-          'uncheck_all_label'        => 'Your "uncheck all" label',
-          'invert_selection_label'   => 'Your "invert selection" label',
+          'enable_autocomplete'      => true
         )));
         
         $this->setValidator('tags', new sfValidatorTags());
       }
     }
 
-## Todo
-* ship jquery with the plugin, and auto-load it only if necessary...
-* add a flash tag cloud
+and you're done.
+
+## Parameters
+
+### required parameters
+* taggable_object: is the only required option for the widget. It must be a Propel object with the sfPropelActAsTaggable behavior
+### optional parameters
+* enable_autocomplete: enables the autocomplete on the text input. The data are taken from the TagPeer::getAll() method. (default: TRUE)
+* check_all_label: the label for the "check all tags" button. (default: Check all)
+* uncheck_all_label: the label for the "uncheck all tags" button. (default: Uncheck all)
+* invert_selection_label: the label for the "invert tags selection" button. (default: Invert selection)
+
 
 ## License and credits
-
-This plugin has been developed by mattsister and is licensed under the MIT license.
+This plugin has been developed by matteosister and is licensed under the MIT license.

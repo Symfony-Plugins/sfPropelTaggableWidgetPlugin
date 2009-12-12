@@ -42,7 +42,6 @@ class sfWidgetFormInputTags extends sfWidgetForm
   }
 
   public function getJavascripts() {
-    // If enable_autocomplete is true (default) inject the proper javascript jQuery library
     return $this->getOption('enable_autocomplete') ? array('/sfPropelTaggableWidgetPlugin/js/jquery.autocomplete.pack.js') : array();
   }
 
@@ -69,7 +68,7 @@ class sfWidgetFormInputTags extends sfWidgetForm
 
     // Generate the autocomplete code
     $autocomplete_js = "var data = \"".implode('|', TagPeer::getAll())."\".split('|');
-            $('input#input_add_tags').autocomplete(data);";
+            $('input#input_add_tags').autocomplete(data, { onItemSelect:selectItem });";
 
     // Generate the js code
     $js_code = "
@@ -106,6 +105,9 @@ class sfWidgetFormInputTags extends sfWidgetForm
             });
           });
 
+          function selectItem(li) {
+            alert(li);
+          }
 
           function addTag() {
             tagName = $('input#input_add_tags').val();
@@ -137,6 +139,7 @@ class sfWidgetFormInputTags extends sfWidgetForm
           }
           
           function addCallbacks() {
+            normalizeStatus();
             $('ul.previous-tags li').each( function() {
               $(this).children('input').change(function() {
                 if ($(this).siblings('em').hasClass('mantain')) {
@@ -145,6 +148,16 @@ class sfWidgetFormInputTags extends sfWidgetForm
                   $(this).siblings('em').addClass('mantain');
                 }
               });
+            });
+          }
+
+          function normalizeStatus() {
+            $('ul.previous-tags li').each( function() {
+              if ($(this).children('em').hasClass('mantain')) {
+                $(this).children('input').attr('checked', 'checked');
+              } else {
+                $(this).children('input').attr('checked', '');
+              }
             });
           }
 
