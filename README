@@ -61,16 +61,18 @@ You will be able to add a nice tag selection tool to your forms.
           'enable_autocomplete'      => true
         )));
         
-        $this->setValidator('tags', new sfValidatorTags());
+        $this->setValidator('tags', new sfValidatorTags(array(
+          'taggable_object'         => $this->getObject()
+        ));
       }
     }
 
-and you're done.
+and you're done. Tags will be automatically attached to the object, when the object is saved.
 
 ## Parameters
 
 ### required parameters
-* taggable_object: is the only required option for the widget. It must be a Propel object with the sfPropelActAsTaggable behavior
+* taggable_object: is the only required option for both widget and validator. It must be a Propel object with the sfPropelActAsTaggable behavior
 ### optional parameters
 * enable_autocomplete: enables the autocomplete on the text input. The data are taken from the TagPeer::getAll() method. (default: TRUE)
 * check_all_label: the label for the "check all tags" button. (default: Check all)

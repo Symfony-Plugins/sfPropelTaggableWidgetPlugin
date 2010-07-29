@@ -20,12 +20,12 @@ ul.previous-tags {
       position: relative;
       top: .2em;
     }
-    ul.previous-tags li em {
+    ul.previous-tags li label {
       font-style: normal;
       color: #AAA;
       text-decoration: line-through;
     }
-    ul.previous-tags li em.mantain {
+    ul.previous-tags li label.mantain {
       color: #333;
       text-decoration: none;
     }

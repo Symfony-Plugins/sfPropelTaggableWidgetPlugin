@@ -53,8 +53,11 @@ class sfWidgetFormInputTags extends sfWidgetForm
     // $html holds the html output of the widget
     $html = '<div>';
     $html .= '<ul class="previous-tags">';
-    foreach ($prev_tags as $tag) {
-      $html .= '<li>'.$this->renderContentTag('input', '<em class="mantain">'.$tag.'</em>', array('type' => 'checkbox', 'name' => $name.'[]', 'checked' => 'checked', 'value' => $tag)).'</li>';
+    foreach ($prev_tags as $tag)
+    {
+      $id    = $this -> generateId($name.'[]', $tag);
+      $label = $this -> renderContentTag('label', $tag, array("for" => $id));
+      $html .= '<li>'.$this->renderContentTag('input', $label, array('class' => 'mantain', 'type' => 'checkbox', 'id' => $id, 'name' => $name.'[]', 'checked' => 'checked', 'value' => $tag)).'</li>';
     }
     $html .= '</ul>';
     $html .= '</div>';
@@ -86,10 +89,10 @@ class sfWidgetFormInputTags extends sfWidgetForm
             }
 
             $('ul.previous-tags li input').each( function() {
-              $(this).siblings('em').removeClass('mantain');
+              $(this).siblings('label').removeClass('mantain');
             });
             $('ul.previous-tags li input:checked').each( function() {
-              $(this).siblings('em').addClass('mantain');
+              $(this).siblings('label').addClass('mantain');
             });
             addCallbacks();
 
@@ -117,7 +120,7 @@ class sfWidgetFormInputTags extends sfWidgetForm
                 $('ul.previous-tags').fadeIn('slow');
                 $('div.tag_common_actions').fadeIn('slow');
               }
-              $('ul.previous-tags').html($('ul.previous-tags').html() + '<li><input type=\"checkbox\" checked=\"checked\" name=\"".$name."[]\" size=\"20\" value=\"' + tagName + '\" /><em class=\"mantain\">' + tagName + '</em></li>');
+              $('ul.previous-tags').html($('ul.previous-tags').html() + '<li><input type=\"checkbox\" checked=\"checked\" name=\"".$name."[]\" size=\"20\" value=\"' + tagName + '\" /><label class=\"mantain\">' + tagName + '</label></li>');
               $('input#input_add_tags').val('');
               addCallbacks();
             }
@@ -142,10 +145,10 @@ class sfWidgetFormInputTags extends sfWidgetForm
             normalizeStatus();
             $('ul.previous-tags li').each( function() {
               $(this).children('input').change(function() {
-                if ($(this).siblings('em').hasClass('mantain')) {
-                  $(this).siblings('em').removeClass('mantain');
+                if ($(this).siblings('label').hasClass('mantain')) {
+                  $(this).siblings('label').removeClass('mantain');
                 } else {
-                  $(this).siblings('em').addClass('mantain');
+                  $(this).siblings('label').addClass('mantain');
                 }
               });
             });
@@ -153,7 +156,7 @@ class sfWidgetFormInputTags extends sfWidgetForm
 
           function normalizeStatus() {
             $('ul.previous-tags li').each( function() {
-              if ($(this).children('em').hasClass('mantain')) {
+              if ($(this).children('label').hasClass('mantain')) {
                 $(this).children('input').attr('checked', 'checked');
               } else {
                 $(this).children('input').attr('checked', '');
@@ -163,20 +166,20 @@ class sfWidgetFormInputTags extends sfWidgetForm
 
           function checkAll() {
             $('ul.previous-tags li input').attr('checked','checked');
-            $('ul.previous-tags li em').addClass('mantain');
+            $('ul.previous-tags li label').addClass('mantain');
           }
           function uncheckAll() {
             $('ul.previous-tags li input').attr('checked','');
-            $('ul.previous-tags li em').removeClass('mantain');
+            $('ul.previous-tags li label').removeClass('mantain');
           }
           function invertSelection() {
             $('ul.previous-tags li').each( function() {
               if ($(this).children('input').attr('checked')) {
                 $(this).children('input').attr('checked','');
-                $(this).children('em').removeClass('mantain');
+                $(this).children('label').removeClass('mantain');
               } else {
                 $(this).children('input').attr('checked','checked');
-                $(this).children('em').addClass('mantain');
+                $(this).children('label').addClass('mantain');
               }
             });
           }
